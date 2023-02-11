@@ -23,7 +23,6 @@ public class UserServiceImp {
 
     @Transactional
     public void create(User user) {
-        System.out.println("Метод в service");
         userRepository.save(user);
     }
 
