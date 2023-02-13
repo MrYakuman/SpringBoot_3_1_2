@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class UserServiceImp {
+public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
 
     @Autowired
@@ -17,27 +17,31 @@ public class UserServiceImp {
         this.userRepository = userRepository;
     }
 
+    @Override
     public List<User> showAll() {
         return userRepository.findAll();
     }
 
     @Transactional
+    @Override
     public void create(User user) {
         userRepository.save(user);
     }
 
+    @Override
     public User show(Integer id) {
         return userRepository.findById(id).orElse(null);
     }
 
+    @Override
     @Transactional
     public void delete(Integer id) {
         userRepository.deleteById(id);
     }
 
-
+    @Override
     @Transactional
     public void update(User user) {
-        userRepository.update(user.getName(), user.getLastName(), user.getAge(), user.getId());
+        userRepository.save(user);
     }
 }
